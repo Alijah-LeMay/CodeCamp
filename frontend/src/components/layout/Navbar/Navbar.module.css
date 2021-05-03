@@ -7,7 +7,6 @@
   width: 100%;
   justify-content: space-around;
   z-index: 10;
-  background-color: black;
 }
 .nav a {
   text-decoration: none;
@@ -33,7 +32,7 @@
   font-size: 1.1rem;
 }
 .desktop_container li a:hover {
-  color: #6ec1e4;
+  color: #4bb781;
 }
 .regular_nav_li a {
   color: white;
@@ -64,9 +63,6 @@
 }
 
 @media (max-width: 980px) {
-  .nav {
-    padding: 20px 0;
-  }
   .desktop_container {
     display: none;
   }
@@ -84,13 +80,13 @@
   align-items: center;
 }
 .drawerlist_container li {
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid#4bb781;
 }
 .drawerlist_container li:hover {
-  border-bottom: 1px solid #6ec1e4;
+  border-bottom: 1px solid #fff;
 }
 .drawerlist_container li a {
-  padding: 15px 0;
+  padding: 15px 5px;
   color: #fff;
 }
 .spacing_container {

@@ -1,14 +1,14 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import classes from './Navbar.module.css';
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import classes from './Navbar.module.css'
 
 const NavigationItems = ({ clicked }) => {
-  let currentlyActiveStyle = { backgroundColor: '#6ec1e4', color: 'black' };
+  let currentlyActiveStyle = { color: '#4bb781' }
 
   let navItems = [
     { to: '/', name: 'Home' },
-    { to: '/training', name: 'In Person Training' },
-  ];
+    { to: '/register', name: 'Log In' },
+  ]
 
   return (
     <>
@@ -18,15 +18,15 @@ const NavigationItems = ({ clicked }) => {
             className={classes.wideLink}
             exact
             activeStyle={currentlyActiveStyle}
-            onClick={clicked}
             to={item.to}
+            onClick={clicked}
           >
             {item.name}
           </NavLink>
         </li>
       ))}
     </>
-  );
-};
+  )
+}
 
-export default NavigationItems;
+export default NavigationItems

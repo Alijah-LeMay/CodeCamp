@@ -1,25 +1,25 @@
-import React, { Fragment } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { StyleRoot } from 'radium';
+import React, { Fragment } from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { StyleRoot } from 'radium'
 
-import classes from './App.module.css';
+import './App.css'
 // Redux
-import { Provider } from 'react-redux';
-import store from './store';
+import { Provider } from 'react-redux'
+import store from './store'
 
 // My Components
-import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer';
-import { useTracking } from './components/utils/useTracking';
-import ScrollToTop from './components/utils/ScrollToTop';
+import Navbar from './components/layout/Navbar'
+import Footer from './components/layout/Footer'
+import { useTracking } from './components/useTracking'
+import ScrollToTop from './components/ScrollToTop'
 
 // My Screens
-import LoginScreen from './screens/LoginScreen';
+import LoginScreen from './screens/LoginScreen'
 
-import HomeScreen from './screens/HomeScreen';
+import HomeScreen from './screens/HomeScreen'
 
 export const App = () => {
-  useTracking('');
+  // useTracking('')
   // input tracking key (G-########)
   // to track analytics
   return (
@@ -31,8 +31,8 @@ export const App = () => {
       </Switch>
       <Footer bgColor='black' fontColor='white' />
     </Fragment>
-  );
-};
+  )
+}
 
 export default () => (
   <Provider store={store}>
@@ -43,4 +43,4 @@ export default () => (
       </StyleRoot>
     </BrowserRouter>
   </Provider>
-);
+)

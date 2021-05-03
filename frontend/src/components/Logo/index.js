@@ -9,7 +9,7 @@ const Logo = ({ width }) => {
     image: {
       width: width ? width : '250px',
       '@media (max-width:440px)': {
-        width: '150px',
+        width: '170px',
       },
     },
   };

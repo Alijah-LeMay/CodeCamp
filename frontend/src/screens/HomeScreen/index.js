@@ -1,17 +1,20 @@
-import React from 'react';
-import classes from './HomeScreen.module.css';
+import React from 'react'
+import classes from './HomeScreen.module.css'
 
 // My Components
-import CenterContainer from '../../components/utils/CenterContainer';
-
+import CenterContainer from '../../components/CenterContainer'
+import { MyEditor } from '../../components/AceEditor'
 // Assets
 
 const HomeScreen = () => {
   return (
-    <div className={classes.homeScreen_Container}>
-      <CenterContainer bgColor='#f2f2f2' bgPadding='25px 0'></CenterContainer>
+    <div className={classes.screen_container}>
+      <CenterContainer bgColor='#f2f2f2' bgPadding='25px 0'>
+        <div>Welcome To Our Code Academy</div>
+        <MyEditor />
+      </CenterContainer>
     </div>
-  );
-};
+  )
+}
 
-export default HomeScreen;
+export default HomeScreen

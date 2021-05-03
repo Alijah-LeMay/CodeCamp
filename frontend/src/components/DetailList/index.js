@@ -1,14 +1,14 @@
-import React from 'react';
-import Radium from 'radium';
-import MyButton from '../utils/Button';
-import Tr from '../utils/Tr';
-import Td from '../utils/Td';
-import { elipsesText } from '../utils/functions';
+import React from 'react'
+import Radium from 'radium'
+import MyButton from '../Button'
+import Tr from '../Tr'
+import Td from '../Td'
+import { elipsesText } from '../functions'
 
 const DetailList = ({ content, buttons, editLoc }) => {
-  let contentArray = [];
+  let contentArray = []
   for (let key in content) {
-    contentArray.push(content[key]);
+    contentArray.push(content[key])
   }
   let rStyle = {
     detailContainer: {
@@ -23,18 +23,18 @@ const DetailList = ({ content, buttons, editLoc }) => {
       overFlow: 'hidden',
       maxWidth: '250px',
     },
-  };
+  }
   return (
     <Tr style={rStyle.detailContainer} key='r1'>
       {contentArray.map((element, index) => {
         if (!element || element === undefined) {
-          element = '';
+          element = ''
         }
         return (
           <Td style={rStyle.detailElement} key={index}>
             {elipsesText(element, 10)}
           </Td>
-        );
+        )
       })}
       {buttons.map((button, index) => {
         if (button.variant === 'func') {
@@ -46,7 +46,7 @@ const DetailList = ({ content, buttons, editLoc }) => {
                 to={button.to}
               />
             </Td>
-          );
+          )
         } else {
           return (
             <Td key={index}>
@@ -56,11 +56,11 @@ const DetailList = ({ content, buttons, editLoc }) => {
                 to={`/admin/${editLoc}/${content._id}/edit`}
               />
             </Td>
-          );
+          )
         }
       })}
     </Tr>
-  );
-};
+  )
+}
 
-export default Radium(DetailList);
+export default Radium(DetailList)
