@@ -1,20 +1,22 @@
 import React, { Fragment, useState, useEffect } from 'react'
-// Assets
-import landing_bck from '../../assets/landing_bck.jpg'
+
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../store/actions/userActions'
+
 // My Components
-import ImageBanner from '../../components/ImageBanner'
 import CenterContainer from '../../components/CenterContainer'
 import FormField from '../../components/FormField'
 import MyButton from '../../components/Button'
 
+// Assets
+import classes from './LoginScreen.module.css'
+
 const LoginScreen = ({ history }) => {
   const dispatch = useDispatch()
   const [formState, setFormState] = useState({
-    email: { value: '' },
-    password: { value: '' },
+    email: '',
+    password: '',
   })
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -32,14 +34,12 @@ const LoginScreen = ({ history }) => {
   // Prepare formState objects
   const formElements = []
   for (let key in formState) {
-    formElements.push({ id: key, setup: formConfig[key] })
+    formElements.push({
+      id: key,
+      setup: formConfig[key],
+      value: formState[key],
+    })
   }
-  useEffect(() => {
-    if (userInfo) {
-      history.push('/admin')
-    }
-  }, [userInfo, history])
-
   const inputChangedHandler = (event, inputIdentifier) => {
     formElements.forEach((formElement) => {
       if (inputIdentifier === formElement.id) {
@@ -57,14 +57,14 @@ const LoginScreen = ({ history }) => {
     dispatch(login(formState.email, formState.password))
   }
 
+  useEffect(() => {
+    if (userInfo && userInfo.isAdmin) {
+      history.push('/admin')
+    }
+  }, [userInfo, history])
+
   return (
-    <Fragment>
-      <ImageBanner
-        imageLOC={landing_bck}
-        bgOpacity
-        opacity={0.3}
-        label='Admin'
-      />
+    <div className={classes.screen_container}>
       <CenterContainer>
         <form onSubmit={submitHandler}>
           <h2>Administrator Login</h2>
@@ -80,7 +80,7 @@ const LoginScreen = ({ history }) => {
           <MyButton content='Submit' variant='submit' />
         </form>
       </CenterContainer>
-    </Fragment>
+    </div>
   )
 }
 

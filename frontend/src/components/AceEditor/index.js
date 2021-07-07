@@ -61,7 +61,7 @@ export const MyEditor = (props) => {
       setMessage('Hello World')
       setIsMessage(true)
     } else {
-      console.log('Vales are NOTTTTT matching')
+      console.log('Vales are NOTTTTT matching', val0, val1)
     }
   }
 
