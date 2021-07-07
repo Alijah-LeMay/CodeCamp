@@ -26,9 +26,9 @@ const createCourse = asyncHandler(async (req, res) => {
 // @access      Public
 
 const getAllCourses = asyncHandler(async (req, res) => {
-  const blogs = await blogs.find()
+  const courses = await Course.find()
 
-  res.json(blogs)
+  res.json(courses)
 })
 
 // desc         Fetch single course
@@ -36,7 +36,7 @@ const getAllCourses = asyncHandler(async (req, res) => {
 // @access      Public
 
 const getCourseById = asyncHandler(async (req, res) => {
-  const course = await course.findById(req.params.id)
+  const course = await Course.findById(req.params.id)
 
   if (course) {
     res.json(course)
@@ -71,11 +71,11 @@ const updateCourse = asyncHandler(async (req, res) => {
   const course = await Course.findById(req.params.id)
 
   if (course) {
-    blog.title = title
-    blog.language = language
-    blog.curriculum = curriculum
-    blog.lessons = lessons
-    blog.availability = availability
+    course.title = title
+    course.language = language
+    course.curriculum = curriculum
+    course.lessons = lessons
+    course.availability = availability
   }
 
   const updatedCourse = await course.save()

@@ -18,6 +18,8 @@ import MyButton from '../../components/Button'
 import Loader from '../../components/Loader'
 import Table from '../../components/Table'
 import TBody from '../../components/TBody'
+import Tr from '../../components/Tr'
+import Td from '../../components/Td'
 
 const CourseListContainer = (props) => {
   const { history } = props
@@ -107,7 +109,11 @@ const CourseListContainer = (props) => {
                   />
                 ))
               ) : (
-                <Loader />
+                <Tr>
+                  <Td>
+                    <Loader />
+                  </Td>
+                </Tr>
               )}
             </TBody>
           </Table>

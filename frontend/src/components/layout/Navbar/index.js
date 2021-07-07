@@ -8,10 +8,12 @@ import classes from './Navbar.module.css'
 import HamburgerMenu from './HamburgerMenu'
 import NavigationItems from './NavigationItems'
 import CenterContainer from '../../CenterContainer'
-import OutlinedNavBtn from './OutlinedNavBtn'
+// import OutlinedNavBtn from './OutlinedNavBtn'
+import Logo from '../../Logo'
 
-const Navbar = () => {
+const Navbar = (props) => {
   const [showSideDrawer, setShowSideDrawer] = useState(false)
+  const { bgColor } = props
 
   const drawerToggleHandler = () => {
     setShowSideDrawer(!showSideDrawer)
@@ -22,16 +24,16 @@ const Navbar = () => {
 
   return (
     <CenterContainer>
-      <nav className={classes.nav}>
+      <nav className={classes.nav} style={{ backgroundColor: bgColor }}>
         <div className={classes.headerLogo}>
           <Link to='/'>
-            <h1 style={{ color: 'white', padding: 0 }}>CodeCamp</h1>
+            <Logo />
           </Link>
         </div>
 
         <ul className={classes.desktop_container}>
           <NavigationItems />
-          <OutlinedNavBtn to='/learn' content='Get Started' />
+          {/* <OutlinedNavBtn to='/quote' content='Hire Us' /> */}
         </ul>
         <HamburgerMenu
           showBack={showSideDrawer}

@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../../store/actions/userActions'
 
 // My Components
 import MyButton from '../../components/Button'
 
 import CourseListContainer from './CourseListContainer'
+
+// assets
+import classes from './AdminScreen.module.css'
 
 const AdminScreen = (props) => {
   const { history } = props
@@ -38,6 +42,8 @@ const AdminScreen = (props) => {
               direction='left'
             />
           </Col>
+        </Row>
+        <Row>
           <Col>
             <CourseListContainer />
           </Col>

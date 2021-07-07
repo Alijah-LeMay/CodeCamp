@@ -2,11 +2,13 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import classes from './Navbar.module.css'
 
-const NavigationItems = ({ clicked }) => {
+const NavigationItems = (props) => {
+  const { clicked } = props
   let currentlyActiveStyle = { color: '#4bb781' }
 
   let navItems = [
     { to: '/', name: 'Home' },
+    { to: '/courses', name: 'Courses' },
     { to: '/register', name: 'Log In' },
   ]
 

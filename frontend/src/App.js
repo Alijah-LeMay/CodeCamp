@@ -10,13 +10,15 @@ import store from './store'
 // My Components
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
-import { useTracking } from './components/useTracking'
+// import { useTracking } from './components/useTracking'
 import ScrollToTop from './components/ScrollToTop'
 
 // My Screens
 import LoginScreen from './screens/LoginScreen'
 
 import HomeScreen from './screens/HomeScreen'
+import AdminScreen from './screens/AdminScreen'
+import EditCourseScreen from './screens/EditCourseScreen'
 
 export const App = () => {
   // useTracking('')
@@ -24,10 +26,16 @@ export const App = () => {
   // to track analytics
   return (
     <Fragment>
-      <Navbar />
+      <Navbar bgColor='grey' />
       <Switch>
         <Route exact path='/' component={HomeScreen} />
         <Route exact path='/login' component={LoginScreen} />
+        <Route exact path='/admin' component={AdminScreen} />
+        <Route
+          exact
+          path='/admin/course/:id/edit'
+          component={EditCourseScreen}
+        />
       </Switch>
       <Footer bgColor='black' fontColor='white' />
     </Fragment>

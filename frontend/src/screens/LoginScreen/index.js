@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
@@ -73,7 +73,7 @@ const LoginScreen = ({ history }) => {
               key={formElement.id}
               type={formElement.setup.type}
               config={formElement.setup.config}
-              value={formElement.setup.value}
+              value={formElement.value}
               changed={(event) => inputChangedHandler(event, formElement.id)}
             />
           ))}

@@ -1,0 +1,49 @@
+.backStrip {
+  height: 10px;
+  background-color: #5178e9;
+}
+.background {
+  background-color: white;
+}
+.innerDiv {
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.innerDiv ul {
+  max-width: 100%;
+  list-style-type: none;
+  margin: 0;
+  align-self: center;
+  padding-inline-start: 0;
+}
+.innerDiv li {
+  list-style-type: none;
+  display: inline-flex;
+  padding: 5px 10px;
+}
+
+.innerDiv a {
+  text-decoration: none;
+  display: inline;
+  color: black;
+}
+.innerDiv a:hover {
+  color: #4bb781;
+}
+
+.copyRight {
+  font-size: 1.1rem;
+}
+.contact {
+  padding: 10px 0;
+  font-size: 1.2rem;
+}
+@media (max-width: 440px) {
+  .innerDiv a:hover {
+    font-size: 0.9rem;
+  }
+  .copyRight {
+    font-size: 0.9rem;
+  }
+}
