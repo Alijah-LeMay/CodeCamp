@@ -19,6 +19,7 @@ import LoginScreen from './screens/LoginScreen'
 import HomeScreen from './screens/HomeScreen'
 import AdminScreen from './screens/AdminScreen'
 import EditCourseScreen from './screens/EditCourseScreen'
+import EditLessonScreen from './screens/EditLessonScreen'
 
 export const App = () => {
   // useTracking('')
@@ -36,6 +37,11 @@ export const App = () => {
           path='/admin/course/:id/edit'
           component={EditCourseScreen}
         />
+        {/* <Route
+          exact
+          path='/admin/course/lesson/:id/edit'
+          component={EditLessonScreen}
+        /> */}
       </Switch>
       <Footer bgColor='black' fontColor='white' />
     </Fragment>

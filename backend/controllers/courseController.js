@@ -9,10 +9,11 @@ const Course = require('../models/Course')
 
 const createCourse = asyncHandler(async (req, res) => {
   const course = new Course({
+    lesson: '60e62be32fd31c5e9c658f46',
     title: 'Sample Title',
     language: 'Javascript',
     curriculum: 'Sample Curriculum',
-    lessons: [''],
+    // lessons: ['60e62be32fd31c5e9c658f46'],
     availability: 'true',
   })
 

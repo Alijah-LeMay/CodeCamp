@@ -1,5 +1,10 @@
 const mongoose = require('mongoose')
 const courseSchema = new mongoose.Schema({
+  lesson: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'Lesson',
+  },
   title: {
     type: String,
     required: true,
@@ -12,10 +17,17 @@ const courseSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  lessons: {
-    type: Array,
-    required: true,
-  },
+  // lessons: [
+  //   {
+  //     title: { type: String, required: true },
+  //     description: { type: String, required: true },
+  //     markdown: { type: String, required: true },
+  //     initialCode: { type: String, required: true },
+  //     matchCode: { type: String, required: true },
+  //     index: { type: Number, required: true },
+  //     max: { type: Number, required: true },
+  //   },
+  // ],
   availability: {
     type: String,
     required: true,

@@ -6,6 +6,7 @@ const path = require('path')
 const { notFound, errorHandler } = require('./middleware/errorMiddleware')
 const userRoutes = require('./routes/userRoutes')
 const courseRoutes = require('./routes/courseRoutes')
+const lessonRoutes = require('./routes/lessonRoutes')
 
 const app = express()
 
@@ -21,6 +22,7 @@ app.get('/', (req, res) => res.send('API Running'))
 // Define Routes
 app.use('/api/user', userRoutes)
 app.use('/api/course', courseRoutes)
+app.use('/api/lesson', lessonRoutes)
 
 // Not Ready for email, .env
 // app.use('/api/send', require('./routes/sendEmail'))

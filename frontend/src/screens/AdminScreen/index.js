@@ -12,6 +12,7 @@ import CourseListContainer from './CourseListContainer'
 
 // assets
 import classes from './AdminScreen.module.css'
+import LessonListContainer from './LessonListContainer'
 
 const AdminScreen = (props) => {
   const { history } = props
@@ -46,6 +47,7 @@ const AdminScreen = (props) => {
         <Row>
           <Col>
             <CourseListContainer />
+            <LessonListContainer />
           </Col>
         </Row>
       </Container>

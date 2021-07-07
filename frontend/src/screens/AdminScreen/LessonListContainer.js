@@ -5,12 +5,12 @@ import { withRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
-  createCourse,
-  deleteCourse,
-  getCourses,
-} from '../../store/actions/courseActions'
+  createLesson,
+  deleteLesson,
+  getLessons,
+} from '../../store/actions/lessonActions'
 
-import { CREATE_COURSE_RESET } from '../../store/constants/courseConstants'
+import { CREATE_LESSON_RESET } from '../../store/constants/lessonConstants'
 
 // My Components
 import DetailList from '../../components/DetailList'
@@ -21,80 +21,80 @@ import TBody from '../../components/TBody'
 import Tr from '../../components/Tr'
 import Td from '../../components/Td'
 
-const CourseListContainer = (props) => {
+const LessonListContainer = (props) => {
   const { history } = props
   const dispatch = useDispatch()
 
-  const courseCreate = useSelector((state) => state.courseCreate)
+  const lessonCreate = useSelector((state) => state.lessonCreate)
   const {
-    loading: loadingCreateCourse,
-    success: successCreateCourse,
-    course: createdCourse,
-  } = courseCreate
+    loading: loadingCreateLesson,
+    success: successCreateLesson,
+    lesson: createdLesson,
+  } = lessonCreate
 
-  const courseList = useSelector((state) => state.courseList)
-  const { loading: loadingCourses, courses } = courseList
+  const lessonList = useSelector((state) => state.lessonList)
+  const { loading: loadingLessons, lessons } = lessonList
 
-  const courseDelete = useSelector((state) => state.courseDelete)
+  const lessonDelete = useSelector((state) => state.lessonDelete)
   const {
     loading: loadingDelete,
     success: successDelete,
     // error: errorDelete,
-  } = courseDelete
+  } = lessonDelete
 
-  const createCourseHandler = () => {
-    dispatch(createCourse('just testing'))
+  const createLessonHandler = () => {
+    dispatch(createLesson())
   }
 
-  const deleteCourseHandler = (id) => {
+  const deleteLessonHandler = (id) => {
     if (window.confirm('Are you sure?')) {
-      dispatch(deleteCourse(id))
+      dispatch(deleteLesson(id))
     }
   }
   useEffect(() => {
     dispatch({
-      type: CREATE_COURSE_RESET,
+      type: CREATE_LESSON_RESET,
     })
 
-    dispatch(getCourses())
+    dispatch(getLessons())
 
-    if (successCreateCourse) {
-      history.push(`/admin/course/${createdCourse._id}/edit`)
+    if (successCreateLesson) {
+      history.push(`/admin/course/lesson/${createdLesson._id}/edit`)
     }
-  }, [dispatch, history, successCreateCourse, createdCourse, successDelete])
+  }, [dispatch, history, successCreateLesson, createdLesson, successDelete])
 
   return (
     <div>
-      <h2>Upload A Course</h2>
+      <h2>Upload A Lesson</h2>
 
       <MyButton
-        content='Create A Course'
+        content='Create A Lesson'
         variant='func'
-        to={createCourseHandler}
+        to={createLessonHandler}
         outMargin='15px'
         direction='left'
       />
       <MyButton
-        content='Go To Courses'
+        content='Go To Lessons'
         outMargin='15px'
         direction='left'
-        to='/courses'
+        to='/course/lesson'
       />
-      {loadingCreateCourse ? <Loader /> : null}
-      {loadingCourses ? (
+      {loadingCreateLesson ? <Loader /> : null}
+      {loadingLessons ? (
         <Loader />
       ) : (
         <div>
-          <h2>Existing Courses</h2>
+          <h2>Existing Lessons</h2>
           <Table fixed>
             <TBody>
-              {courses ? (
-                courses.map((item, idx) => (
+              {lessons ? (
+                lessons.map((item, idx) => (
                   <DetailList
                     key={idx}
-                    label='Existing Courses'
+                    label='Existing Lessons'
                     content={item}
-                    editLoc='course'
+                    editLoc='lesson'
                     buttons={[
                       {
                         link: item._id,
@@ -102,7 +102,7 @@ const CourseListContainer = (props) => {
                       },
                       {
                         variant: 'func',
-                        to: () => deleteCourseHandler(item._id),
+                        to: () => deleteLessonHandler(item._id),
                         content: 'Del',
                       },
                     ]}
@@ -124,4 +124,4 @@ const CourseListContainer = (props) => {
   )
 }
 
-export default withRouter(CourseListContainer)
+export default withRouter(LessonListContainer)

@@ -15,6 +15,7 @@ import {
   getCourseDetails,
   updateCourse,
 } from '../../store/actions/courseActions'
+import { LanguageOptions, AvailabilityOptions } from './FormOptions'
 
 const EditCourseScreen = (props) => {
   const { match, history } = props
@@ -33,6 +34,8 @@ const EditCourseScreen = (props) => {
     title: '',
     language: '',
     curriculum: '',
+    availability: '',
+    lessons: '',
   })
   const formConfig = {
     title: {
@@ -40,12 +43,28 @@ const EditCourseScreen = (props) => {
       config: { type: 'text', placeholder: 'Course Title' },
     },
     language: {
-      type: 'input',
-      config: { type: 'text', placeholder: 'Course Language' },
+      type: 'select',
+      config: {
+        type: 'text',
+        placeholder: 'Language',
+        options: LanguageOptions,
+      },
     },
     curriculum: {
       type: 'input',
       config: { type: 'text', placeholder: 'Course Curriculum' },
+    },
+    availability: {
+      type: 'select',
+      config: {
+        type: 'text',
+        placeholder: 'Availability',
+        options: AvailabilityOptions,
+      },
+    },
+    lessons: {
+      type: 'input',
+      config: { type: 'text', placeholder: 'Course Lessons' },
     },
   }
   useEffect(() => {
@@ -60,9 +79,10 @@ const EditCourseScreen = (props) => {
           title: course.title,
           language: course.language,
           curriculum: course.curriculum,
+          availability: course.availability,
+          lessons: course.lessons,
         })
         // set Lessons
-        setImage(course.files)
       }
     }
   }, [dispatch, history, courseId, successUpdate, course])
@@ -100,7 +120,8 @@ const EditCourseScreen = (props) => {
         title: formState.title,
         language: formState.language,
         curriculum: formState.curriculum,
-        videos: formState.videos,
+        availability: formState.availability,
+        lessons: formState.lessons,
       })
     )
   }
@@ -108,6 +129,12 @@ const EditCourseScreen = (props) => {
   return (
     <div className={classes.screen_container}>
       <CenterContainer>
+        <MyButton
+          content='Go Back'
+          to='/admin'
+          outMargin='15px'
+          direction='left'
+        />
         {course && (
           <div>
             <MyButton
@@ -116,10 +143,11 @@ const EditCourseScreen = (props) => {
               outMargin='15px'
               direction='left'
             />
-            {console.log('lessons - ', course.lessons)}
+            {course.lessons && console.log('lessons - ', course.lessons.join())}
           </div>
         )}
         <h2>Edit Course</h2>
+
         <form onSubmit={submitHandler}>
           {formElements.map((formElement) => (
             <FormField
@@ -130,6 +158,8 @@ const EditCourseScreen = (props) => {
               changed={(event) => inputChangedHandler(event, formElement.id)}
             />
           ))}
+          {course.lessons &&
+            course.lessons.map((item, idx) => <div>one item</div>)}
 
           <MyButton
             content='Submit'
