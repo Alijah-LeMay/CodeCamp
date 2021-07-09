@@ -5,7 +5,7 @@ import classes from './Footer.module.css'
 
 let navItems = [
   { to: '/', name: 'Home' },
-  { to: '/courses', name: 'Courses' },
+  { to: '/course', name: 'Courses' },
   { to: '/register', name: 'Log In' },
 ]
 

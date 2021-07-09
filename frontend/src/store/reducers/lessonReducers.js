@@ -9,6 +9,9 @@ import {
   LESSON_DETAILS_REQUEST,
   LESSON_DETAILS_SUCCESS,
   LESSON_DETAILS_FAIL,
+  MULTI_LESSON_DETAILS_REQUEST,
+  MULTI_LESSON_DETAILS_SUCCESS,
+  MULTI_LESSON_DETAILS_FAIL,
   UPDATE_LESSON_REQUEST,
   UPDATE_LESSON_SUCCESS,
   UPDATE_LESSON_FAIL,
@@ -52,6 +55,18 @@ export const lessonDetailsReducer = (state = { lesson: {} }, action) => {
     case LESSON_DETAILS_SUCCESS:
       return { loading: false, success: true, lesson: action.payload }
     case LESSON_DETAILS_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+export const multiLessonDetailsReducer = (state = { lessons: [] }, action) => {
+  switch (action.type) {
+    case MULTI_LESSON_DETAILS_REQUEST:
+      return { loading: true, ...state }
+    case MULTI_LESSON_DETAILS_SUCCESS:
+      return { loading: false, success: true, lessons: action.payload }
+    case MULTI_LESSON_DETAILS_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state

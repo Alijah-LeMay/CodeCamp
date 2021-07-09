@@ -20,6 +20,10 @@ import HomeScreen from './screens/HomeScreen'
 import AdminScreen from './screens/AdminScreen'
 import EditCourseScreen from './screens/EditCourseScreen'
 import EditLessonScreen from './screens/EditLessonScreen'
+import CoursePostScreen from './screens/CoursePostScreen'
+import CoursesScreen from './screens/CoursesScreen'
+import NotFoundScreen from './screens/NotFoundScreen'
+import LessonPostScreen from './screens/LessonPostScreen'
 
 export const App = () => {
   // useTracking('')
@@ -32,16 +36,20 @@ export const App = () => {
         <Route exact path='/' component={HomeScreen} />
         <Route exact path='/login' component={LoginScreen} />
         <Route exact path='/admin' component={AdminScreen} />
+        <Route exact path='/course' component={CoursesScreen} />
+        <Route exact path='/course/:id' component={CoursePostScreen} />
+        <Route exact path='/lesson/:id' component={LessonPostScreen} />
         <Route
           exact
           path='/admin/course/:id/edit'
           component={EditCourseScreen}
         />
-        {/* <Route
+        <Route
           exact
-          path='/admin/course/lesson/:id/edit'
+          path='/admin/lesson/:id/edit'
           component={EditLessonScreen}
-        /> */}
+        />
+        <Route component={NotFoundScreen} />
       </Switch>
       <Footer bgColor='black' fontColor='white' />
     </Fragment>

@@ -22,16 +22,31 @@ app.get('/', (req, res) => res.send('API Running'))
 // Define Routes
 app.use('/api/user', userRoutes)
 app.use('/api/course', courseRoutes)
-app.use('/api/lesson', lessonRoutes)
+app.use('/api/lesson', lessonRoutes) /
+  // Not Ready for email, .env
+  // app.use('/api/send', require('./routes/sendEmail'))
 
-// Not Ready for email, .env
-// app.use('/api/send', require('./routes/sendEmail'))
-//
-// Image upload route
-app.use('/api/upload', require('./routes/upload'))
-// Make uploads folder statis
+  // Image upload route
+  app.use('/api/upload', require('./routes/upload'))
+// Make uploads folder static
 const dirname = path.resolve()
-app.use('/uploads', express.static(path.join(dirname, '/uploads')))
+if (process.env.NODE_ENV === 'production') {
+  app.use('/uploads', express.static(path.join(dirname, '../uploads/')))
+} else {
+  app.use('/uploads', express.static(path.join(dirname, '/uploads/')))
+}
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(dirname, '/frontend/build')))
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(dirname, 'frontend', 'build', 'index.html'))
+  })
+} else {
+  app.get('/', (req, res) => {
+    res.send('API is running...')
+  })
+}
 
 //
 // Make sure middleware is after all other routes

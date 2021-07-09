@@ -9,6 +9,9 @@ import {
   LESSON_DETAILS_REQUEST,
   LESSON_DETAILS_SUCCESS,
   LESSON_DETAILS_FAIL,
+  MULTI_LESSON_DETAILS_REQUEST,
+  MULTI_LESSON_DETAILS_FAIL,
+  MULTI_LESSON_DETAILS_SUCCESS,
   UPDATE_LESSON_REQUEST,
   UPDATE_LESSON_SUCCESS,
   UPDATE_LESSON_FAIL,
@@ -90,6 +93,29 @@ export const getLessonDetails = (id) => async (dispatch) => {
     })
   }
 }
+export const getMultiLessonDetails = (ids) => async (dispatch) => {
+  try {
+    dispatch({ type: MULTI_LESSON_DETAILS_REQUEST })
+    let lessonsData = []
+    for (let item in ids) {
+      const { data } = await axios.get(`/api/lesson/${ids[item]}`)
+      lessonsData.push(data)
+    }
+    console.log(lessonsData)
+    dispatch({
+      type: MULTI_LESSON_DETAILS_SUCCESS,
+      payload: lessonsData,
+    })
+  } catch (error) {
+    dispatch({
+      type: MULTI_LESSON_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
 
 export const deleteLesson = (id) => async (dispatch, getState) => {
   try {
@@ -106,7 +132,7 @@ export const deleteLesson = (id) => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.delete(`/api/course/lesson/${id}`, config)
+    const { data } = await axios.delete(`/api/lesson/${id}`, config)
 
     dispatch({
       type: DELETE_LESSON_SUCCESS,
@@ -139,7 +165,7 @@ export const updateLesson = (lesson) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.put(
-      `/api/course/lesson/${lesson._id}`,
+      `/api/lesson/${lesson._id}`,
       lesson,
       config
     )

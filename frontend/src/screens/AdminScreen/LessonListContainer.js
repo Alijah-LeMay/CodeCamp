@@ -59,7 +59,7 @@ const LessonListContainer = (props) => {
     dispatch(getLessons())
 
     if (successCreateLesson) {
-      history.push(`/admin/course/lesson/${createdLesson._id}/edit`)
+      history.push(`/admin/lesson/${createdLesson._id}/edit`)
     }
   }, [dispatch, history, successCreateLesson, createdLesson, successDelete])
 
@@ -78,7 +78,7 @@ const LessonListContainer = (props) => {
         content='Go To Lessons'
         outMargin='15px'
         direction='left'
-        to='/course/lesson'
+        to='/lesson'
       />
       {loadingCreateLesson ? <Loader /> : null}
       {loadingLessons ? (

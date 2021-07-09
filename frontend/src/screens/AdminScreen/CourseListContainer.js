@@ -78,7 +78,7 @@ const CourseListContainer = (props) => {
         content='Go To Courses'
         outMargin='15px'
         direction='left'
-        to='/courses'
+        to='/course'
       />
       {loadingCreateCourse ? <Loader /> : null}
       {loadingCourses ? (

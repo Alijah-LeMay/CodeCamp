@@ -8,12 +8,14 @@ const Course = require('../models/Course')
 // @access      Private / Admin
 
 const createCourse = asyncHandler(async (req, res) => {
+  const { lessons } = req.body
   const course = new Course({
-    lesson: '60e62be32fd31c5e9c658f46',
+    lessons: lessons,
     title: 'Sample Title',
-    language: 'Javascript',
+    description: 'sample description',
+    markDown: 'sample markdown',
+    language: 'javascript',
     curriculum: 'Sample Curriculum',
-    // lessons: ['60e62be32fd31c5e9c658f46'],
     availability: 'true',
   })
 
@@ -67,16 +69,28 @@ const deleteCourse = asyncHandler(async (req, res) => {
 // @access      Private / Admin
 
 const updateCourse = asyncHandler(async (req, res) => {
-  const { title, language, curriculum, lessons, availability } = req.body
+  const {
+    title,
+    language,
+    curriculum,
+    lessons,
+    availability,
+    description,
+    markDown,
+    images,
+  } = req.body
 
   const course = await Course.findById(req.params.id)
 
   if (course) {
     course.title = title
+    course.description = description
+    course.markDown = markDown
     course.language = language
     course.curriculum = curriculum
     course.lessons = lessons
     course.availability = availability
+    course.images = images
   }
 
   const updatedCourse = await course.save()

@@ -9,11 +9,12 @@ const lessonSchema = mongoose.Schema({
 
   title: { type: String, required: true },
   description: { type: String, required: true },
-  markdown: { type: String, required: true },
+  markDown: { type: String, required: true },
   initialCode: { type: String, required: true },
   matchCode: { type: String, required: true },
   index: { type: Number, required: true },
   max: { type: Number, required: true },
+  completed: { type: Boolean, required: false },
 })
 
 module.exports = Lesson = mongoose.model('Lesson', lessonSchema)

@@ -10,7 +10,6 @@ import Loader from '../../components/Loader'
 const HomeScreen = () => {
   return (
     <div className={classes.screen_container}>
-      <Loader />
       <CenterContainer bgColor='#f2f2f2' bgPadding='25px 0'>
         <div>Welcome To Our Code Academy</div>
         <MyEditor />
