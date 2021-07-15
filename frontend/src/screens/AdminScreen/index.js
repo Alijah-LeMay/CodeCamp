@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../store/actions/userActions'
 
 // My Components
-import MyButton from '../../components/Button'
+import MyButton from '../../components/MyButton'
 
 import CourseListContainer from './CourseListContainer'
 
@@ -32,7 +32,7 @@ const AdminScreen = (props) => {
   }, [dispatch, history, userInfo])
   return (
     <div className={classes.screen_container}>
-      <Container>
+      <Container fluid>
         <Row>
           <Col>
             <MyButton

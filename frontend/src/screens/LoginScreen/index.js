@@ -7,7 +7,7 @@ import { login } from '../../store/actions/userActions'
 // My Components
 import CenterContainer from '../../components/CenterContainer'
 import FormField from '../../components/FormField'
-import MyButton from '../../components/Button'
+import MyButton from '../../components/MyButton'
 
 // Assets
 import classes from './LoginScreen.module.css'

@@ -12,7 +12,7 @@ import { getCourses } from '../../store/actions/courseActions'
 import classes from './CoursesScreen.module.css'
 // My Components
 
-import MyButton from '../../components/Button'
+import MyButton from '../../components/MyButton'
 
 const CoursesScreen = (props) => {
   const { history } = props

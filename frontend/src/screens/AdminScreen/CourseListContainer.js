@@ -14,7 +14,7 @@ import { CREATE_COURSE_RESET } from '../../store/constants/courseConstants'
 
 // My Components
 import DetailList from '../../components/DetailList'
-import MyButton from '../../components/Button'
+import MyButton from '../../components/MyButton'
 import Loader from '../../components/Loader'
 import Table from '../../components/Table'
 import TBody from '../../components/TBody'

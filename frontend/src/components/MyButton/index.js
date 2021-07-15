@@ -71,7 +71,7 @@ const MyButton = ({
         },
         submitBtn: {
           display: 'block',
-          margin: margin && margin,
+          margin: margin ? margin : 'auto',
           padding: padding ? padding : '15px',
           textDecoration: decoration ? decoration : 'none',
           height: 'auto',
@@ -85,7 +85,10 @@ const MyButton = ({
           },
         },
         buttonPara: {
-          textAlign: direction && direction,
+          display: 'inline-flex',
+          alignItems: 'center',
+          margin: outMargin ? outMargin : 'auto',
+          float: direction && direction,
           textDecoration: decoration ? decoration : 'none',
           padding: padding ? padding : '15px',
           height: 'auto',
@@ -96,10 +99,12 @@ const MyButton = ({
           borderWidth: '0px',
           ':hover': {
             color: hoverColor ? hoverColor : 'white',
+            backgroundColor: bgHoverColor ? bgHoverColor : 'black',
           },
         },
       }
     }
+
   // sanity check
   if (!to) {
     to = '/'

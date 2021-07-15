@@ -1,6 +1,6 @@
 import React from 'react'
 import Radium from 'radium'
-import MyButton from '../Button'
+import MyButton from '../MyButton'
 import Tr from '../Tr'
 import Td from '../Td'
 import { elipsesText } from '../functions'

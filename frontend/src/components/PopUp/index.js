@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 
 // My Components
 import Backdrop from '../Backdrop'
-import MyButton from '../Button'
+import MyButton from '../MyButton'
 import { withRouter } from 'react-router'
 
 const PopUp = (props) => {

@@ -13,7 +13,7 @@ import { UPDATE_COURSE_RESET } from '../../store/constants/courseConstants'
 
 // My Components
 import CenterContainer from '../../components/CenterContainer'
-import MyButton from '../../components/Button'
+import MyButton from '../../components/MyButton'
 import FormField from '../../components/FormField'
 
 import Loader from '../../components/Loader'
@@ -151,7 +151,7 @@ const EditCourseScreen = (props) => {
         language: formState.language,
         curriculum: formState.curriculum,
         availability: formState.availability,
-        lessons: formState.lessons,
+        lessons: formState.lessons.split(','),
         images: image,
       })
     )

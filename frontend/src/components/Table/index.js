@@ -1,5 +1,6 @@
-import React from 'react';
-import Radium from 'radium';
+import React from 'react'
+import Radium from 'radium'
+import { Container, Col, Row } from 'react-bootstrap'
 
 const Table = ({ variant, children, fixed }) => {
   let rStyle = {
@@ -7,8 +8,8 @@ const Table = ({ variant, children, fixed }) => {
       backgroundColor: '#ccc',
       tableLayout: fixed && 'fixed',
     },
-  };
-  return <table style={rStyle.table}>{children}</table>;
-};
+  }
+  return <table style={rStyle.table}>{children}</table>
+}
 
-export default Radium(Table);
+export default Radium(Table)

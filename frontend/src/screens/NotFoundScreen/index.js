@@ -3,7 +3,7 @@ import React from 'react'
 // My Components
 import CenterContainer from '../../components/CenterContainer'
 import Meta from '../../components/Meta'
-import MyButton from '../../components/Button'
+import MyButton from '../../components/MyButton'
 
 // Assets
 import classes from './NotFoundScreen.module.css'

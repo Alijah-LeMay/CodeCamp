@@ -8,16 +8,17 @@ import 'ace-builds/src-min-noconflict/ext-searchbox'
 import 'ace-builds/src-min-noconflict/ext-language_tools'
 import 'ace-builds/src-noconflict/theme-github'
 import 'ace-builds/src-noconflict/theme-twilight'
+import { Container, Col, Row } from 'react-bootstrap'
 
 // Mine
 import { stripText } from './utils'
 
 // My Components
-import MyButton from '../Button'
+import MyButton from '../MyButton'
 import classes from './AceEditor.module.css'
 // Render editor
 export const MyEditor = (props) => {
-  const { theme } = props
+  const { theme, language, editorValue, onChange, value } = props
   const currentCodeValue = ['', `console.log("Hello World")`]
   const [singleEditorValue, setSingleEditorValue] = useState('')
   const [currentMode, setCurrentMode] = useState('javascript')
@@ -72,49 +73,58 @@ export const MyEditor = (props) => {
   return (
     <>
       <div className='columns'>
-        <div className='column'>
-          <div className='field'>
-            <label>Mode:</label>
-            <p className='control'>
-              <span className='select'>
-                <select name='mode' onChange={setMode} value={currentMode}>
-                  {languages.map((lang) => (
-                    <option key={lang} value={lang}>
-                      {lang}
-                    </option>
-                  ))}
-                </select>
-              </span>
-            </p>
-          </div>
+        {!language && (
+          <div className='column'>
+            <div className='field'>
+              <label>Mode:</label>
+              <p className='control'>
+                <span className='select'>
+                  <select name='mode' onChange={setMode} value={currentMode}>
+                    {languages.map((lang) => (
+                      <option key={lang} value={lang}>
+                        {lang}
+                      </option>
+                    ))}
+                  </select>
+                </span>
+              </p>
+            </div>
 
-          <div className='field' />
-        </div>
+            <div className='field' />
+          </div>
+        )}
+
         <div className={classes.editor_container}>
           <h2>Editor</h2>
-
-          <AceEditor
-            editorProps={{ $blockScrolling: true }}
-            mode={currentMode}
-            theme={theme ? theme : 'twilight'}
-            onChange={singleEditorChangeHandler}
-            setOptions={{
-              enableBasicAutocompletion: true,
-              enableLiveAutocompletion: true,
-              enableSnippets: true,
-              fontSize: 16,
-            }}
-            style={{
-              height: '75vh',
-              width: '100%',
-            }}
-          />
-          <MyButton
-            content='Test Matching'
-            to={() => onSubmitSingleHandler(singleEditorValue)}
-            variant='func'
-          />
-          {isMessage ? <div>{message}</div> : null}
+          <Container fluid>
+            <Row>
+              <Col>
+                <AceEditor
+                  value={value && value}
+                  editorProps={{ $blockScrolling: true }}
+                  mode={language ? language : currentMode}
+                  theme={theme ? theme : 'twilight'}
+                  onChange={onChange ? onChange : singleEditorChangeHandler}
+                  setOptions={{
+                    enableBasicAutocompletion: true,
+                    enableLiveAutocompletion: true,
+                    enableSnippets: true,
+                    fontSize: 16,
+                  }}
+                  style={{
+                    height: '75vh',
+                    width: '100%',
+                  }}
+                />
+                <MyButton
+                  content='Test Matching'
+                  to={() => onSubmitSingleHandler(value)}
+                  variant='func'
+                />
+                {isMessage ? <div>{message}</div> : null}
+              </Col>
+            </Row>
+          </Container>
         </div>
       </div>
     </>

@@ -11,6 +11,7 @@ const createLesson = asyncHandler(async (req, res) => {
   const lesson = new Lesson({
     user: req.user._id,
     title: 'Sample name',
+    language: 'javascript',
     description: 'Sample Description',
     markDown: 'Sample Markdown',
     initialCode: 'Sample code',
@@ -55,6 +56,7 @@ const getLessonById = asyncHandler(async (req, res) => {
 const updateLesson = asyncHandler(async (req, res) => {
   const {
     title,
+    language,
     description,
     markDown,
     initialCode,
@@ -68,6 +70,7 @@ const updateLesson = asyncHandler(async (req, res) => {
 
   if (lesson) {
     lesson.title = title
+    lesson.language = language
     lesson.description = description
     lesson.markDown = markDown
     lesson.initialCode = initialCode

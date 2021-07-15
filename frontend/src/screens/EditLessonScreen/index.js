@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { UPDATE_LESSON_RESET } from '../../store/constants/lessonConstants'
 // My Components
 import CenterContainer from '../../components/CenterContainer'
-import MyButton from '../../components/Button'
+import MyButton from '../../components/MyButton'
 import FormField from '../../components/FormField'
 
 // Assets
@@ -15,6 +15,9 @@ import {
   getLessonDetails,
   updateLesson,
 } from '../../store/actions/lessonActions'
+
+// Other
+import { LanguageOptions } from './FormOptions'
 
 const EditLessonScreen = (props) => {
   const { match, history } = props
@@ -29,6 +32,7 @@ const EditLessonScreen = (props) => {
 
   const [formState, setFormState] = useState({
     title: '',
+    language: '',
     description: '',
     markDown: '',
     initialCode: '',
@@ -40,6 +44,14 @@ const EditLessonScreen = (props) => {
     title: {
       type: 'input',
       config: { type: 'text', placeholder: 'Lesson Title' },
+    },
+    language: {
+      type: 'select',
+      config: {
+        type: 'text',
+        placeholder: 'Language',
+        options: LanguageOptions,
+      },
     },
     description: {
       type: 'input',
@@ -76,6 +88,7 @@ const EditLessonScreen = (props) => {
       } else {
         setFormState({
           title: lesson.title,
+          language: lesson.language,
           description: lesson.description,
           markDown: lesson.markDown,
           initialCode: lesson.initialCode,
@@ -119,6 +132,7 @@ const EditLessonScreen = (props) => {
         _id: lessonId,
         user: lesson.user,
         title: formState.title,
+        language: formState.language,
         description: formState.description,
         markDown: formState.markDown,
         initialCode: formState.initialCode,

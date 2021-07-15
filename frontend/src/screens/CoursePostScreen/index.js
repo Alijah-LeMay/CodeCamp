@@ -9,7 +9,7 @@ import { getMultiLessonDetails } from '../../store/actions/lessonActions'
 // Assets
 import classes from './CoursePostScreen.module.css'
 import Loader from '../../components/Loader'
-import MyButton from '../../components/Button'
+import MyButton from '../../components/MyButton'
 
 const CoursePostScreen = (props) => {
   const { match, history } = props

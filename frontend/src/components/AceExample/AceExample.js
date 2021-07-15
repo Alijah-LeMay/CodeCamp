@@ -10,7 +10,7 @@ import 'ace-builds/src-min-noconflict/ext-language_tools'
 import 'ace-builds/src-noconflict/theme-github'
 
 // My Components
-import MyButton from '../Button'
+import MyButton from '../MyButton'
 // Render editor
 export const AceExample = () => {
   const [currentCodeValue, setCurrentCodeValue] = useState([
@@ -135,6 +135,7 @@ export const AceExample = () => {
             variant='func'
           />
           <AceEditor
+            value={value && value}
             editorProps={{ $blockScrolling: true }}
             mode={currentMode}
             theme='github'

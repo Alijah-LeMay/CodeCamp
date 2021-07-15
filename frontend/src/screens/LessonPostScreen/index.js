@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import CenterContainer from '../../components/CenterContainer'
 import ReactMarkdown from 'react-markdown'
 // Redux
@@ -7,7 +7,7 @@ import { getLessonDetails } from '../../store/actions/lessonActions'
 
 // My Components
 import Loader from '../../components/Loader'
-import MyButton from '../../components/Button'
+import MyButton from '../../components/MyButton'
 import { MyEditor } from '../../components/AceEditor'
 
 // Assets
@@ -17,15 +17,21 @@ const LessonPostScreen = (props) => {
   const lessonId = match.params.id
   const dispatch = useDispatch()
 
+  const [formState, setFormState] = useState('')
+
   const lessonDetails = useSelector((state) => state.lessonDetails)
   const { loading: loadingLesson, lesson } = lessonDetails
 
-  const lessonUpdate = useSelector((state) => state.lessonUpdate)
-  const { success: successUpdate } = lessonUpdate
+  const inputChangedHandler = (e) => {
+    setFormState(e)
+  }
 
   useEffect(() => {
     if (!lesson || lessonId !== lesson._id) {
       dispatch(getLessonDetails(lessonId))
+    }
+    if (lesson) {
+      setFormState(lesson.initialCode)
     }
   }, [dispatch, history, lessonId, lesson])
   return (
@@ -38,8 +44,13 @@ const LessonPostScreen = (props) => {
           <p>
             {lesson.index}/{lesson.max}
           </p>
+          <p>{lesson.language}</p>
           <CenterContainer>
-            <MyEditor />
+            <MyEditor
+              language={lesson.language}
+              onChange={inputChangedHandler}
+              value={formState}
+            />
           </CenterContainer>
         </>
       )}
