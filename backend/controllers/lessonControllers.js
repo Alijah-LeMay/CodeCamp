@@ -9,7 +9,7 @@ const Lesson = require('../models/Lesson')
 
 const createLesson = asyncHandler(async (req, res) => {
   const lesson = new Lesson({
-    user: req.user._id,
+    author: req.user._id,
     title: 'Sample name',
     language: 'javascript',
     description: 'Sample Description',
@@ -35,12 +35,11 @@ const getAllLessons = asyncHandler(async (req, res) => {
 })
 
 // desc         Fetch single lesson
-// @route       GET /api/course/:id
+// @route       GET /api/lesson/:id
 // @access      Public
 
 const getLessonById = asyncHandler(async (req, res) => {
   const lesson = await Lesson.findById(req.params.id)
-
   if (lesson) {
     res.json(lesson)
   } else {
@@ -63,7 +62,7 @@ const updateLesson = asyncHandler(async (req, res) => {
     matchCode,
     index,
     max,
-    user,
+    author,
   } = req.body
 
   const lesson = await Lesson.findById(req.params.id)
@@ -77,7 +76,7 @@ const updateLesson = asyncHandler(async (req, res) => {
     lesson.matchCode = matchCode
     lesson.index = index
     lesson.max = max
-    lesson.user = user
+    lesson.author = author
   }
 
   const updatedLesson = await lesson.save()

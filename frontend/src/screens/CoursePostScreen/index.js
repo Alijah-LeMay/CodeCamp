@@ -4,12 +4,16 @@ import ReactMarkdown from 'react-markdown'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { getCourseDetails } from '../../store/actions/courseActions'
-import { getMultiLessonDetails } from '../../store/actions/lessonActions'
+import {
+  getMultiUserLessonDetails,
+  getUserLessons,
+} from '../../store/actions/userLessonActions'
 
 // Assets
 import classes from './CoursePostScreen.module.css'
 import Loader from '../../components/Loader'
 import MyButton from '../../components/MyButton'
+import { getMultiLessonDetails } from '../../store/actions/lessonActions'
 
 const CoursePostScreen = (props) => {
   const { match, history } = props
@@ -19,16 +23,14 @@ const CoursePostScreen = (props) => {
   const courseDetails = useSelector((state) => state.courseDetails)
   const { loading: loadingCourse, course } = courseDetails
 
-  const multiLessonDetails = useSelector((state) => state.multiLessonDetails)
-  const { loading: loadingLessons, lessons } = multiLessonDetails
+  const userLessonList = useSelector((state) => state.userLessonList)
+  const { loading: loadingLessons, userLessons } = userLessonList
 
   useEffect(() => {
     if (!course || courseId !== course._id) {
       dispatch(getCourseDetails(courseId))
     } else {
-      {
-        course.lessons && dispatch(getMultiLessonDetails(course.lessons))
-      }
+      course.lessons && dispatch(getUserLessons(course.lessons))
     }
   }, [dispatch, history, courseId, course])
   return (
@@ -44,19 +46,23 @@ const CoursePostScreen = (props) => {
             <p>{course.curriculum}</p>
             <p>{course.availability}</p>
             <ReactMarkdown source={course.markDown} />
-            <h3>Lessons</h3>
+            <h3>Completed Lessons</h3>
             {loadingLessons ? (
               <Loader />
             ) : (
-              lessons.map((item) => {
+              userLessons.map((item) => {
                 return (
                   <div key={item._id}>
+                    {console.log(item)}
                     <p>{item.title}</p>
                     <p>{item.description}</p>
+                    <p>{String(item.completed)}</p>
                     <MyButton
                       content='Open'
+                      styleVariant='clear'
+                      bgHoverColor='lightgrey'
+                      hoverColor='grey'
                       outMargin='5px'
-                      direction='middle'
                       to={`/lesson/${item._id}`}
                     />
                   </div>

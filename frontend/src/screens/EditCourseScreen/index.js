@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { Container, Col, Row } from 'react-bootstrap'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
@@ -58,7 +59,7 @@ const EditCourseScreen = (props) => {
       config: { type: 'text', placeholder: 'Course description' },
     },
     markDown: {
-      type: 'input',
+      type: 'textarea',
       config: { type: 'text', placeholder: 'Course markdown' },
     },
     language: {
@@ -141,7 +142,13 @@ const EditCourseScreen = (props) => {
   }
 
   const submitHandler = (e) => {
+    let formLessons
     e.preventDefault()
+    if (typeof formState.lessons === 'string') {
+      formLessons = formState.lessons.split(',')
+    } else {
+      formLessons = formState.lessons
+    }
     dispatch(
       updateCourse({
         _id: courseId,
@@ -151,7 +158,7 @@ const EditCourseScreen = (props) => {
         language: formState.language,
         curriculum: formState.curriculum,
         availability: formState.availability,
-        lessons: formState.lessons.split(','),
+        lessons: formLessons,
         images: image,
       })
     )
@@ -186,84 +193,97 @@ const EditCourseScreen = (props) => {
   return (
     <div className={classes.screen_container}>
       <CenterContainer>
-        <MyButton
-          content='Go Back'
-          to='/admin'
-          outMargin='15px'
-          direction='middle'
-        />
-        <h2>Edit Course</h2>
-        {loadingCourse ? (
-          <Loader />
-        ) : (
-          <>
-            <MyButton
-              content='View Post'
-              to={`/course/${course._id}`}
-              outMargin='15px'
-              direction='middle'
-            />
-            <form onSubmit={submitHandler}>
-              <div>
-                {image.map((item, idx) => {
-                  return (
-                    <div key={idx}>
-                      <img src={item} style={{ width: '100px' }} alt={item} />
-                      <MyButton
-                        content='del'
-                        variant='func'
-                        to={() => imageDeleteHandler(item)}
-                      />
-                    </div>
-                  )
-                })}
-                <input type='file' onChange={uploadFileHandler} name={image} />
-                {uploading && <div>...loading...</div>}
-                <MyButton content='Submit' variant='submit' />
-              </div>
-              {formElements.map((formElement) => (
-                <FormField
-                  key={formElement.id}
-                  type={formElement.setup.type}
-                  config={formElement.setup.config}
-                  value={formElement.value}
-                  changed={(event) =>
-                    inputChangedHandler(event, formElement.id)
-                  }
-                />
-              ))}
-              {lessons.length > 0 &&
-                lessons.map((item, idx) => (
-                  <div key={idx}>
-                    {item.title}
-                    <p>{item._id}</p>
-                    <p>
-                      {item.index} / {item.max}
-                    </p>
-                    <MyButton
-                      content='View Post'
-                      to={`/lesson/${item}`}
-                      outMargin='15px'
-                      direction='middle'
-                    />
-                    <MyButton
-                      content='Edit Post'
-                      to={`/admin/lesson/${item._id}/edit`}
-                      outMargin='15px'
-                      direction='middle'
-                    />
-                  </div>
-                ))}
-
+        <Container fluid>
+          <MyButton
+            content='Go Back'
+            to='/admin'
+            outMargin='15px'
+            direction='middle'
+          />
+          <h2>Edit Course</h2>
+          {loadingCourse ? (
+            <Loader />
+          ) : (
+            <>
               <MyButton
-                content='Submit'
-                variant='submit'
+                content='View Post'
+                to={`/course/${course._id}`}
                 outMargin='15px'
-                direction='right'
+                direction='middle'
               />
-            </form>
-          </>
-        )}
+              <form onSubmit={submitHandler}>
+                <div>
+                  {image.map((item, idx) => {
+                    return (
+                      <div key={idx}>
+                        <img src={item} style={{ width: '100px' }} alt={item} />
+                        <MyButton
+                          content='del'
+                          variant='func'
+                          to={() => imageDeleteHandler(item)}
+                        />
+                      </div>
+                    )
+                  })}
+                  <input
+                    type='file'
+                    onChange={uploadFileHandler}
+                    name={image}
+                  />
+                  {uploading && <div>...loading...</div>}
+                  <MyButton content='Submit' variant='submit' />
+                </div>
+                {formElements.map((formElement) => (
+                  <FormField
+                    key={formElement.id}
+                    type={formElement.setup.type}
+                    config={formElement.setup.config}
+                    value={formElement.value}
+                    label={formElement.setup.config.placeholder}
+                    changed={(event) =>
+                      inputChangedHandler(event, formElement.id)
+                    }
+                  />
+                ))}
+                <Row>
+                  <Col>
+                    <div className={classes.small_post_container}>
+                      {lessons.length > 0 &&
+                        lessons.map((item, idx) => (
+                          <div key={idx} className={classes.small_post}>
+                            {item.title}
+                            <p>{item._id}</p>
+                            <p>
+                              {item.index} / {item.max}
+                            </p>
+                            <MyButton
+                              content='View Post'
+                              to={`/lesson/${item}`}
+                              outMargin='15px'
+                              direction='middle'
+                            />
+                            <MyButton
+                              content='Edit Post'
+                              to={`/admin/lesson/${item._id}/edit`}
+                              outMargin='15px'
+                              direction='middle'
+                            />
+                          </div>
+                        ))}
+                    </div>
+                  </Col>
+                </Row>
+
+                <MyButton
+                  content='Submit'
+                  variant='submit'
+                  outMargin='15px'
+                  direction='right'
+                />
+              </form>
+            </>
+          )}
+        </Container>
       </CenterContainer>
     </div>
   )

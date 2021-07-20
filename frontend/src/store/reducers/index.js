@@ -15,6 +15,12 @@ import {
   lessonUpdateReducer,
   multiLessonDetailsReducer,
 } from './lessonReducers'
+import {
+  userLessonCreateReducer,
+  userLessonListReducer,
+  userLessonDetailsReducer,
+  multiUserLessonDetailsReducer,
+} from './userLessonReducers'
 import { userLoginReducer } from './userReducers'
 
 export default combineReducers({
@@ -27,6 +33,13 @@ export default combineReducers({
   multiLessonDetails: multiLessonDetailsReducer,
   lessonDelete: lessonDeleteReducer,
   lessonUpdate: lessonUpdateReducer,
+
+  userLessonCreate: userLessonCreateReducer,
+  userLessonList: userLessonListReducer,
+  userLessonDetails: userLessonDetailsReducer,
+  multiUserLessonDetails: multiUserLessonDetailsReducer,
+  // lessonUserDelete: lessonUserDeleteReducer,
+  // lessonUserUpdate: lessonUserUpdateReducer,
 
   courseCreate: courseCreateReducer,
   courseList: courseListReducer,

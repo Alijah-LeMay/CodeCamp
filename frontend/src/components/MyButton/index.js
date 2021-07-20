@@ -114,7 +114,7 @@ const MyButton = ({
   //  INSIDE LINKS
   let template = (
     <div style={rStyle.containerDiv}>
-      <Link to={to}>
+      <Link to={to} style={{ textDecoration: 'none' }}>
         <p style={rStyle.buttonPara}>{content ? content : children}</p>
       </Link>
     </div>

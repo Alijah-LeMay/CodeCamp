@@ -74,6 +74,7 @@ const LoginScreen = ({ history }) => {
               type={formElement.setup.type}
               config={formElement.setup.config}
               value={formElement.value}
+              label={formElement.setup.config.placeholder}
               changed={(event) => inputChangedHandler(event, formElement.id)}
             />
           ))}

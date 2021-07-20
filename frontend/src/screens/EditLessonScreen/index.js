@@ -130,7 +130,7 @@ const EditLessonScreen = (props) => {
     dispatch(
       updateLesson({
         _id: lessonId,
-        user: lesson.user,
+        author: lesson.author,
         title: formState.title,
         language: formState.language,
         description: formState.description,
@@ -172,6 +172,7 @@ const EditLessonScreen = (props) => {
               type={formElement.setup.type}
               config={formElement.setup.config}
               value={formElement.value}
+              label={formElement.setup.config.placeholder}
               changed={(event) => inputChangedHandler(event, formElement.id)}
             />
           ))}

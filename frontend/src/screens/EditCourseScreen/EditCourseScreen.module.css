@@ -4,3 +4,10 @@
   padding: 85px 0;
   min-height: 90vh;
 }
+.small_post_container {
+  margin: auto;
+  display: flex;
+}
+.small_post {
+  margin: auto;
+}
