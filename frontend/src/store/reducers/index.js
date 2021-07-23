@@ -20,6 +20,7 @@ import {
   userLessonListReducer,
   userLessonDetailsReducer,
   multiUserLessonDetailsReducer,
+  userLessonUpdateReducer,
 } from './userLessonReducers'
 import { userLoginReducer } from './userReducers'
 
@@ -38,8 +39,8 @@ export default combineReducers({
   userLessonList: userLessonListReducer,
   userLessonDetails: userLessonDetailsReducer,
   multiUserLessonDetails: multiUserLessonDetailsReducer,
-  // lessonUserDelete: lessonUserDeleteReducer,
-  // lessonUserUpdate: lessonUserUpdateReducer,
+  // userLessonDelete: userLessonDeleteReducer,
+  userLessonUpdate: userLessonUpdateReducer,
 
   courseCreate: courseCreateReducer,
   courseList: courseListReducer,

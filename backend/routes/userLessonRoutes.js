@@ -21,6 +21,9 @@ router
   .post(protect, createUserLesson)
   .get(protect, getAllUserLessons)
 
-router.route('/:id').get(getUserLessonById).put(protect, updateUserLesson)
+router
+  .route('/:id')
+  .get(protect, getUserLessonById)
+  .put(protect, updateUserLesson)
 
 module.exports = router

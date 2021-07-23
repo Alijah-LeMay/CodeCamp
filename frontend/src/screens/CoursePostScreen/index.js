@@ -33,6 +33,7 @@ const CoursePostScreen = (props) => {
       course.lessons && dispatch(getUserLessons(course.lessons))
     }
   }, [dispatch, history, courseId, course])
+
   return (
     <div className={classes.screen_container}>
       <CenterContainer>

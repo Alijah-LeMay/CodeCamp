@@ -17,7 +17,7 @@ import {
   UPDATE_USER_LESSON_FAIL,
 } from '../constants/userLessonConstants'
 
-export const createUserLesson = (lesson) => async (dispatch, getState) => {
+export const createUserLesson = (lessonInfo) => async (dispatch, getState) => {
   try {
     dispatch({ type: CREATE_USER_LESSON_REQUEST })
 
@@ -32,7 +32,7 @@ export const createUserLesson = (lesson) => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.post('/api/userLesson', lesson, config)
+    const { data } = await axios.post('/api/userLesson', lessonInfo, config)
 
     dispatch({
       type: CREATE_USER_LESSON_SUCCESS,
@@ -105,11 +105,22 @@ export const getUserLessons = (ids) => async (dispatch, getState) => {
   }
 }
 
-export const getUserLessonDetails = (id) => async (dispatch) => {
+export const getUserLessonDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_LESSON_DETAILS_REQUEST })
 
-    const { data } = await axios.get(`/api/userLesson/${id}`)
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    const { data } = await axios.get(`/api/userLesson/${id}`, config)
 
     dispatch({
       type: USER_LESSON_DETAILS_SUCCESS,

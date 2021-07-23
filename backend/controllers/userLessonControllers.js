@@ -11,7 +11,7 @@ const createUserLesson = asyncHandler(async (req, res) => {
   const { lesson } = req.body
   const userLesson = new UserLesson({
     user: req.user._id,
-    authorLesson: authorLesson,
+    authorLesson: lesson,
     completed: false,
     initialCode: 'Sample code',
   })
@@ -37,8 +37,9 @@ const getAllUserLessons = asyncHandler(async (req, res) => {
 // @access      Private
 
 const getUserLessonById = asyncHandler(async (req, res) => {
-  const { user } = req.body
-  const lesson = await UserLesson.find({ user: user })
+  const user = req.user._id
+  const parent = req.params.id
+  const lesson = await UserLesson.findOne({ user: user, authorLesson: parent })
 
   if (lesson) {
     res.json(lesson)
@@ -63,9 +64,11 @@ const getUserLessonById = asyncHandler(async (req, res) => {
 // @access      Private
 
 const updateUserLesson = asyncHandler(async (req, res) => {
-  const { completed, initialCode, authorLesson, user } = req.body
+  const { completed, initialCode, authorLesson } = req.body
+  const user = req.user._id
+  const id = req.params.id
 
-  const lesson = await Lesson.findById(req.params.id)
+  const lesson = await UserLesson.findOne({ authorLesson: id, user: user })
 
   if (lesson) {
     lesson.completed = completed
