@@ -1,8 +1,7 @@
 import React from 'react'
 import Radium from 'radium'
-import { Container, Col, Row } from 'react-bootstrap'
 
-const Table = ({ variant, children, fixed }) => {
+const Table = ({ children, fixed }) => {
   let rStyle = {
     table: {
       backgroundColor: '#ccc',

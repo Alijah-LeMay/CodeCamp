@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
-import { Container, Col, Row } from 'react-bootstrap'
+import { Container, Row } from 'react-bootstrap'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,7 +15,7 @@ import classes from './CoursesScreen.module.css'
 import MyButton from '../../components/MyButton'
 
 const CoursesScreen = (props) => {
-  const { history } = props
+  // const { history } = props
   const dispatch = useDispatch()
 
   const courseList = useSelector((state) => state.courseList)

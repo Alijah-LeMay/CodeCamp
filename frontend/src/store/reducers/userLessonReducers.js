@@ -16,9 +16,9 @@ import {
   UPDATE_USER_LESSON_SUCCESS,
   UPDATE_USER_LESSON_FAIL,
   UPDATE_USER_LESSON_RESET,
-  DELETE_USER_LESSON_REQUEST,
-  DELETE_USER_LESSON_SUCCESS,
-  DELETE_USER_LESSON_FAIL,
+  // DELETE_USER_LESSON_REQUEST,
+  // DELETE_USER_LESSON_SUCCESS,
+  // DELETE_USER_LESSON_FAIL,
 } from '../constants/userLessonConstants'
 
 export const userLessonCreateReducer = (state = { lesson: {} }, action) => {
@@ -55,6 +55,8 @@ export const userLessonDetailsReducer = (
   switch (action.type) {
     case USER_LESSON_DETAILS_REQUEST:
       return { loading: true, ...state }
+    case USER_LESSON_DETAILS_SUCCESS:
+      return { loading: false, success: true, userLesson: action.payload }
     case USER_LESSON_DETAILS_SUCCESS:
       return { loading: false, success: true, userLesson: action.payload }
     case USER_LESSON_DETAILS_FAIL:

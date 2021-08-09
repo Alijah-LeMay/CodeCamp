@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import CenterContainer from '../../components/CenterContainer'
-import ReactMarkdown from 'react-markdown'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  getLessonDetails,
-  updateLesson,
-} from '../../store/actions/lessonActions'
+import { getLessonDetails } from '../../store/actions/lessonActions'
 
 // My Components
 import Loader from '../../components/Loader'
-import MyButton from '../../components/MyButton'
 import { MyEditor } from '../../components/AceEditor'
 
 // Assets
@@ -44,31 +39,35 @@ const LessonPostScreen = (props) => {
     e.preventDefault()
     if (!userLesson) {
       dispatch(createUserLesson({ lesson: lessonId }))
+    } else {
+      dispatch(
+        updateUserLesson({
+          _id: lessonId,
+          authorLesson: lessonId,
+          initialCode: formState,
+          completed: true,
+        })
+      )
     }
-    dispatch(
-      updateUserLesson({
-        _id: lessonId,
-        authorLesson: lessonId,
-        initialCode: formState,
-        completed: true,
-      })
-    )
   }
 
   useEffect(() => {
     if (!lesson || lessonId !== lesson._id) {
-      dispatch(getLessonDetails(lessonId))
       dispatch(getUserLessonDetails(lessonId))
-    }
-    if (!userLesson) {
-      setFormState(lesson.initialCode)
+      dispatch(getLessonDetails(lessonId))
     } else {
-      setFormState(userLesson.initialCode)
+      if (!userLesson) {
+        setFormState(lesson.initialCode)
+      } else {
+        setFormState(userLesson.initialCode)
+      }
     }
   }, [dispatch, history, lessonId, lesson, userLesson])
   return (
     <div className={classes.screen_container}>
       <h2>Lesson: {lesson && lesson.title}</h2>
+      <h2>completed: {userLesson && `${userLesson.completed}`}</h2>
+      {/* {loadingUserLesson ? <Loader /> :} */}
       {loadingLesson ? (
         <Loader />
       ) : (

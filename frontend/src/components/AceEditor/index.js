@@ -18,8 +18,9 @@ import MyButton from '../MyButton'
 import classes from './AceEditor.module.css'
 // Render editor
 export const MyEditor = (props) => {
-  const { theme, language, editorValue, onChange, value } = props
+  const { theme, language, onChange, value } = props
   const currentCodeValue = ['', `console.log("Hello World")`]
+
   const [singleEditorValue, setSingleEditorValue] = useState('')
   const [currentMode, setCurrentMode] = useState('javascript')
   const [isMessage, setIsMessage] = useState('false')

@@ -4,16 +4,12 @@ import ReactMarkdown from 'react-markdown'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { getCourseDetails } from '../../store/actions/courseActions'
-import {
-  getMultiUserLessonDetails,
-  getUserLessons,
-} from '../../store/actions/userLessonActions'
+import { getUserLessons } from '../../store/actions/userLessonActions'
 
 // Assets
 import classes from './CoursePostScreen.module.css'
 import Loader from '../../components/Loader'
 import MyButton from '../../components/MyButton'
-import { getMultiLessonDetails } from '../../store/actions/lessonActions'
 
 const CoursePostScreen = (props) => {
   const { match, history } = props
@@ -24,7 +20,7 @@ const CoursePostScreen = (props) => {
   const { loading: loadingCourse, course } = courseDetails
 
   const userLessonList = useSelector((state) => state.userLessonList)
-  const { loading: loadingLessons, userLessons } = userLessonList
+  const { loading: loadingUserLessons, userLessons } = userLessonList
 
   useEffect(() => {
     if (!course || courseId !== course._id) {
@@ -46,28 +42,53 @@ const CoursePostScreen = (props) => {
             <p>{course.language}</p>
             <p>{course.curriculum}</p>
             <p>{course.availability}</p>
-            <ReactMarkdown source={course.markDown} />
-            <h3>Completed Lessons</h3>
-            {loadingLessons ? (
+            <ReactMarkdown children={course.markDown} />
+
+            <h3> Lessons</h3>
+            {loadingUserLessons ? (
               <Loader />
             ) : (
               userLessons.map((item) => {
-                return (
-                  <div key={item._id}>
-                    {console.log(item)}
-                    <p>{item.title}</p>
-                    <p>{item.description}</p>
-                    <p>{String(item.completed)}</p>
-                    <MyButton
-                      content='Open'
-                      styleVariant='clear'
-                      bgHoverColor='lightgrey'
-                      hoverColor='grey'
-                      outMargin='5px'
-                      to={`/lesson/${item._id}`}
-                    />
-                  </div>
-                )
+                if (item.completed === false)
+                  return (
+                    <div key={item._id}>
+                      <p>{item.title}</p>
+                      <p>{item.description}</p>
+                      <p>{String(item.completed)}</p>
+                      <MyButton
+                        content='Open'
+                        styleVariant='clear'
+                        bgHoverColor='lightgrey'
+                        hoverColor='grey'
+                        outMargin='5px'
+                        to={`/lesson/${item._id}`}
+                      />
+                    </div>
+                  )
+              })
+            )}
+            <h3>Completed Lessons</h3>
+            {loadingUserLessons ? (
+              <Loader />
+            ) : (
+              userLessons.map((item) => {
+                if (item.completed === true) {
+                  return (
+                    <div key={item._id}>
+                      <p>{item.title}</p>
+                      <p>{item.description}</p>
+                      <p>{String(item.completed)}</p>
+                      <MyButton
+                        content='Open'
+                        styleVariant='clear'
+                        bgHoverColor='lightgrey'
+                        hoverColor='grey'
+                        outMargin='5px'
+                        to={`/lesson/${item._id}`}
+                      />
+                    </div>
+                  )
+                }
               })
             )}
           </div>

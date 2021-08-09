@@ -4,7 +4,6 @@ import classes from './HomeScreen.module.css'
 // My Components
 import CenterContainer from '../../components/CenterContainer'
 import { MyEditor } from '../../components/AceEditor'
-import Loader from '../../components/Loader'
 // Assets
 
 const HomeScreen = () => {

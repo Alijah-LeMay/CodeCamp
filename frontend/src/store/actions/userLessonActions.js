@@ -8,6 +8,7 @@ import {
   CREATE_USER_LESSON_FAIL,
   USER_LESSON_DETAILS_REQUEST,
   USER_LESSON_DETAILS_SUCCESS,
+  INCOMPLETE_USER_LESSON_DETAILS_SUCCESS,
   USER_LESSON_DETAILS_FAIL,
   MULTI_USER_LESSON_DETAILS_REQUEST,
   MULTI_USER_LESSON_DETAILS_FAIL,
@@ -65,11 +66,12 @@ export const getUserLessons = (ids) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.get('/api/userLesson', config)
+    console.log('data - ', data)
 
     const userLessonIdsArray = []
 
     for (let i in data) {
-      userLessonIdsArray.push(data[i].lesson)
+      userLessonIdsArray.push(data[i].authorLesson)
     }
 
     let lessonsData = []
@@ -83,11 +85,11 @@ export const getUserLessons = (ids) => async (dispatch, getState) => {
       for (let id in data) {
         if (lessonsData[lesson]._id === userLessonIdsArray[id]) {
           lessonsData[lesson].completed = data[id].completed
+
           lessonsData[lesson].initialCode = data[id].initialCode
         }
       }
     }
-
     console.log('lessonsData - ', lessonsData)
 
     dispatch({
@@ -120,7 +122,7 @@ export const getUserLessonDetails = (id) => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get(`/api/userLesson/${id}`, config)
+    let { data } = await axios.get(`/api/userLesson/${id}`, config)
 
     dispatch({
       type: USER_LESSON_DETAILS_SUCCESS,
@@ -153,11 +155,7 @@ export const getMultiUserLessonDetails =
 
       let lessonsData = []
       for (let item in ids) {
-        const { data } = await axios.get(
-          `/api/userLesson/${ids[item]}`,
-          completedIds,
-          config
-        )
+        const { data } = await axios.get(`/api/lesson/${ids[item]}`, config)
         lessonsData.push(data)
       }
       dispatch({
